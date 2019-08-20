@@ -5,6 +5,9 @@
 key*
 keys*
 
+# instructions PDF
+"Mod 3 Project DC - 071519 .pdf"
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
