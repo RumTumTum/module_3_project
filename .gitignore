@@ -6,7 +6,8 @@ key*
 keys*
 
 # instructions PDF
-"Mod 3 Project DC - 071519 .pdf"
+instructions.*
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
