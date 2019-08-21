@@ -5,20 +5,11 @@ It should be repeatable.
 ## PRECLEANING
 There should be a separate script recording how you transformed the json api calls into a dataframe and csv.
 
-## SUPPORT FUNCTIONS
-There can be an unlimited amount of support functions.
-Each support function should have an informative name and return the partially cleaned bit of the dataset.
-"""
 import pandas as pd
 
-def support_function_one(example):
-    pass
 
-def support_function_two(example):
-    pass
 
-def support_function_three(example):
-    pass
+
 
 def full_clean():
     """
