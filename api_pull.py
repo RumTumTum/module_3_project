@@ -49,4 +49,6 @@ def get_all_members(start=102,end=115,chamber='senate',verbose=False):
         df_list[len(df_list)-1]['congress'] = congress
     full_df = pd.concat(df_list)
     full_df.reset_index(drop=True,inplace=True)
-    return full_df
+    path = "data/dirty_data_{}_members.csv".format(chamber)
+    full_df.to_csv(path,index=False)
+#     return full_df

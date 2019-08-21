@@ -4,14 +4,17 @@ It should be repeatable.
 
 ## PRECLEANING
 There should be a separate script recording how you transformed the json api calls into a dataframe and csv.
-
+"""
 import pandas as pd
+import api_pull
 
-
-
-
+def get_all_members(chamber):
+    path = "data/dirty_data_{}_members.csv".format(chamber)
+    member_data = pd.DataFrame.from_csv(path)
+    return member_data
 
 def full_clean():
+    
     """
     This is the one function called that will run all the support functions.
     Assumption: Your data will be saved in a data folder and named "dirty_data.csv"
