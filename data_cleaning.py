@@ -8,11 +8,6 @@ There should be a separate script recording how you transformed the json api cal
 import pandas as pd
 import api_pull
 
-def get_all_members(chamber):
-    path = "data/dirty_data_{}_members.csv".format(chamber)
-    member_data = pd.DataFrame.from_csv(path)
-    return member_data
-
 def full_clean():
     
     """
