@@ -1,6 +1,9 @@
 # data folder
 /data
 
+# images folder
+/images
+
 # keys py
 key*
 keys*
