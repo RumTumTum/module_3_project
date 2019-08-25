@@ -1,6 +1,9 @@
 # data folder
 /data
 
+# images folder
+# does not need to be ignored
+
 # keys py
 key*
 keys*
