@@ -1,6 +1,9 @@
 # temporary
-Final/
-/Final
+Final/keys*
+/Final/keys*
+/Final/data*
+/Final/data/
+/Final/data
 
 # data folder
 /data
