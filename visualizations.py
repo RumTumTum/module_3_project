@@ -1,111 +1,177 @@
-"""
-This module is for your final visualization code.
-One visualization per hypothesis question is required.
-A framework for each type of visualization is provided.
-"""
+"""This is the visualization module"""
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+import functions as f
 
 # Set specific parameters for the visualizations
-large = 22; med = 16; small = 12
-params = {'axes.titlesize': large,
-          'legend.fontsize': med,
+LARGE = 22
+MED = 16
+SMALL = 12
+PARAMS = {'axes.titlesize': LARGE,
+          'legend.fontsize': MED,
           'figure.figsize': (16, 10),
-          'axes.labelsize': med,
-          'xtick.labelsize': med,
-          'ytick.labelsize': med,
-          'figure.titlesize': large}
-plt.rcParams.update(params)
+          'axes.labelsize': MED,
+          'xtick.labelsize': MED,
+          'ytick.labelsize': MED,
+          'figure.titlesize': LARGE}
+plt.rcParams.update(PARAMS)
 plt.style.use('seaborn-whitegrid')
 sns.set_style("white")
 
 
-def overlapping_density(package=None, input_vars=None, target_vars=None):
-    """
-    Set the characteristics of your overlapping density plot
-    All arguments are set to None purely as a filler right now
-
-    Function takes package name, input variables(categories), and target variable as input.
-    Returns a figure
-
-    Should be able to call this function in later visualization code.
-
-    PARAMETERS
-
-    :param package:        should only take sns or matplotlib as inputs, any other value should throw and error
-    :param input_vars:     should take the x variables/categories you want to plot
-    :param target_vars:    the y variable of your plot, what you are comparing
-    :return:               fig to be enhanced in subsequent visualization functions
-    """
-
+def overlapping_density(input_vars):
+    """Creates overlapping density graph"""
     # Set size of figure
     fig = plt.figure(figsize=(16, 10), dpi=80)
 
     # Starter code for figuring out which package to use
-    if package == "sns":
-        for variable in input_vars:
-            sns.kdeplot(...)
-    elif package == 'matplotlib':
-        for variable in input_vars:
-            plt.plot(..., label=None, linewidth=None, color=None, figure = fig)
-
+    for variable in input_vars:
+        sns.kdeplot(variable[1], shade=True, color=variable[2],
+                    label=variable[0], figure=fig)
     return fig
 
 
+def visualization_one(cleaned_data, input_vars=None,
+                      output_image_name="hypothesis_one"):
+    """Creates visualization for hypothesis one"""
 
-def boxplot_plot(package=None, input_vars=None, target_vars=None):
-    """
-    Same specifications and requirements as overlapping density plot
-
-    Function takes package name, input variables(categories), and target variable as input.
-    Returns a figure
-
-    PARAMETERS
-
-    :param package:        should only take sns or matplotlib as inputs, any other value should throw and error
-    :param input_vars:     should take the x variables/categories you want to plot
-    :param target_vars:    the y variable of your plot, what you are comparing
-    :return:               fig to be enhanced in subsequent visualization functions
-    """
-    plt.figure(figsize=(16, 10), dpi=80)
-
-    pass
-
-
-def visualization_one(target_var = None, input_vars= None, output_image_name=None):
-    """
-    The visualization functions are what is used to create each individual image.
-    The function should be repeatable if not generalizable
-    The function will call either the boxplot or density plot functions you wrote above
-
-    :param target_var:
-    :param input_vars:
-    :param output_image_name: the desired name for the image saved
-    :return: outputs a saved png file and returns a fig object for testing
-    """
-    ###
-    # Main chunk of code here
+    comparison_groups = f.sample_of_means_percent_yay(cleaned_data)
+    rep_samples = ["Republican", comparison_groups[0], "r"]
+    dem_samples = ["Democratic", comparison_groups[1], "b"]
+    input_vars = [rep_samples, dem_samples]
+    overlapping_density(input_vars)
     ###
 
     # Starter code for labeling the image
-    plt.xlabel(None, figure = fig)
-    plt.ylabel(None, figure = fig)
-    plt.title(None, figure= fig)
+    plt.xlabel('Percentage Voting "Yay"')
+    plt.ylabel("Probability Density")
+    plt.title('Comparison of Parties Voting "Yay" by Percentage')
+    plt.legend()
+
+    plt.savefig(f'img/{output_image_name}.png', transparent=True)
+
+
+def visualization_two(cleaned_data, input_vars=None,
+                      output_image_name="hypothesis_two"):
+    """Creates visualization for hypothesis two"""
+
+    cleaned_data = cleaned_data.loc[cleaned_data.chamber == 'house']
+    comparison_groups = f.sample_of_means_percent_yay(cleaned_data)
+    rep_samples = ["Republican", comparison_groups[0], "r"]
+    dem_samples = ["Democratic", comparison_groups[1], "b"]
+    input_vars = [rep_samples, dem_samples]
+    overlapping_density(input_vars)
+    ###
+
+    # Starter code for labeling the image
+    plt.xlabel('Percentage Voting "Yay"')
+    plt.ylabel("Probability Density")
+    plt.title('Comparison of Parties Voting "Yay" by Percentage in House')
+    plt.legend()
+
+    plt.savefig(f'img/{output_image_name}.png', transparent=True)
+
+
+def visualization_three(cleaned_data, input_vars=None,
+                        output_image_name="hypothesis_three"):
+    """Creates visualization for hypothesis three"""
+
+    cleaned_data = cleaned_data.loc[cleaned_data.chamber == 'senate']
+    comparison_groups = f.sample_of_means_percent_yay(cleaned_data)
+    rep_samples = ["Republican", comparison_groups[0], "r"]
+    dem_samples = ["Democratic", comparison_groups[1], "b"]
+    input_vars = [rep_samples, dem_samples]
+    overlapping_density(input_vars)
+    ###
+
+    # Starter code for labeling the image
+    plt.xlabel('Percentage Voting "Yay"')
+    plt.ylabel("Probability Density")
+    plt.title('Comparison of Parties Voting "Yay" by Percentage in Senate')
+    plt.legend()
+
+    plt.savefig(f'img/{output_image_name}.png', transparent=True)
+
+
+def visualization_four(cleaned_data, input_vars=None,
+                       output_image_name="hypothesis_four"):
+    """Creates visualization for hypothesis four"""
+    ###
+    comparison_groups = f.collect_sample_means_party(cleaned_data)
+    rep_samples = ["Republican", comparison_groups[0], "r"]
+    dem_samples = ["Democratic", comparison_groups[1], "b"]
+    input_vars = [rep_samples, dem_samples]
+    overlapping_density(input_vars)
+    ###
+
+    # Starter code for labeling the image
+    plt.xlabel("Percentage Abstaining from Vote")
+    plt.ylabel("Probability Density")
+    plt.title("Comparison of Nonvoting Parties by Percentage")
     plt.legend()
 
     # exporting the image to the img folder
-    plt.savefig(f'img/{output_image_name}.png', transparent = True, figure = fig)
-    return fig
+    plt.savefig(f'img/{output_image_name}.png', transparent=True)
 
 
-# please fully flesh out this function to meet same specifications of visualization one
+def visualization_five(cleaned_data, input_vars=None,
+                       output_image_name="hypothesis_five"):
+    """Creates visualization for hypothesis five"""
+    ###
+    comparison_groups = f.collect_sample_means_chamber(cleaned_data)
+    sen_samples = ["Senate", comparison_groups[0], "r"]
+    house_samples = ["House", comparison_groups[1], "b"]
+    input_vars = [sen_samples, house_samples]
+    overlapping_density(input_vars)
+    ###
 
-def visualization_two(output_image_name):
-    pass
+    # Starter code for labeling the image
+    plt.xlabel("Percentage Abstaining from Vote")
+    plt.ylabel("Probability Density")
+    plt.title("Comparison of Nonvoting Chambers by Percentage")
+    plt.legend()
 
-def visualization_three(output_image_name):
-    pass
+    plt.savefig(f'img/{output_image_name}.png', transparent=True)
 
-def visualization_four(output_image_name):
-    pass
+
+def visualization_six(cleaned_data, input_vars=None,
+                      output_image_name="hypothesis_six"):
+    """Creates visualization for hypothesis six"""
+
+    cleaned_data = cleaned_data.loc[cleaned_data.chamber == 'senate']
+    comparison_groups = f.collect_sample_means_party(cleaned_data)
+    rep_samples = ["Senate Republican", comparison_groups[0], "r"]
+    dem_samples = ["Senate Democratic", comparison_groups[1], "b"]
+    input_vars = [rep_samples, dem_samples]
+    overlapping_density(input_vars)
+    ###
+
+    # Starter code for labeling the image
+    plt.xlabel("Percentage Abstaining from Vote")
+    plt.ylabel("Probability Density")
+    plt.title("Comparison of Nonvoting Senate Parties by Percentage")
+    plt.legend()
+
+    plt.savefig(f'img/{output_image_name}.png', transparent=True)
+
+
+def visualization_seven(cleaned_data, input_vars=None,
+                        output_image_name="hypothesis_seven"):
+    """Creates visualization for hypothesis seven"""
+
+    cleaned_data = cleaned_data.loc[cleaned_data.chamber == 'house']
+    comparison_groups = f.collect_sample_means_party(cleaned_data)
+    rep_samples = ["House Republican", comparison_groups[0], "r"]
+    dem_samples = ["House Democratic", comparison_groups[1], "b"]
+    input_vars = [rep_samples, dem_samples]
+    overlapping_density(input_vars)
+    ###
+
+    # Starter code for labeling the image
+    plt.xlabel("Percentage Abstaining from Vote")
+    plt.ylabel("Probability Density")
+    plt.title("Comparison of Nonvoting House Parties by Percentage")
+    plt.legend()
+
+    plt.savefig(f'img/{output_image_name}.png', transparent=True)
